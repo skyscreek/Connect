@@ -15,15 +15,19 @@ if (isset($_POST['nutzer-erstellen'])) {
                 if (strlen($password) >= 6 && strlen($password) <= 60) {
 
                     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-
-                        DB::query('INSERT INTO nutzer VALUES (\'\', :username, :password, :email)', array(':username'=>$username, ':password'=>password_hash($password, PASSWORD_BCRYPT), ':email'=>$email));
+                        if (!DB::query('SELECT email FROM nutzer WHERE email=:email', array(':email'=>$email))) {
+                            DB::query('INSERT INTO nutzer VALUES (\'\', :username, :password, :email)', array(':username'=>$username, ':password'=>password_hash($password, PASSWORD_BCRYPT), ':email'=>$email));
 
                         echo "Deine Registrierung war erfolgreich!";
 
                     } else {
+                        echo 'Email existiert bereits!';
+                    }
+
+                    } else {
                         echo 'Deine Email Adresse ist falsch!';
                     }
+
                 } else {
                     echo 'Dein Passwort ist falsch!';
                 }
@@ -31,6 +35,7 @@ if (isset($_POST['nutzer-erstellen'])) {
             } else {
                 echo 'Dein Benutzername ist falsch';
             }
+
         } else {
             echo 'Dein Benutzername ist falsch';
 
