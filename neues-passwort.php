@@ -3,14 +3,14 @@ include('./klassen/DB.php');
 include('./klassen/anmeldung_klasse.php');
 if (anmeldung_klasse::isLoggedIn()) {
     if (isset($_POST['passwort_aendern'])) {
-        $oldpassword = $_POST['altes_passwort'];
-        $newpassword = $_POST['neues_passwort'];
-        $newpasswordrepeat = $_POST['neues_passwort_wiederholen'];
-        $userid = anmeldung_klasse::isLoggedIn();
-        if (password_verify($oldpassword, DB::query('SELECT password FROM nutzer WHERE id=:userid', array(':userid'=>$userid))[0]['password'])) {
-            if ($newpassword == $newpasswordrepeat) {
-                if (strlen($newpassword) >= 6 && strlen($newpassword) <= 60) {
-                    DB::query('UPDATE nutzer SET password=:neues_passwort WHERE id=:userid', array(':newpassword'=>password_hash($newpassword, PASSWORD_BCRYPT), ':userid'=>$userid));
+        $altespasswort = $_POST['altes_passwort'];
+        $neuespasswort = $_POST['neues_passwort'];
+        $neuespasswortwiederholen = $_POST['neues_passwort_wiederholen'];
+        $nutzerid = anmeldung_klasse::isLoggedIn();
+        if (password_verify($altespasswort, DB::query('SELECT passwort FROM nutzer WHERE id=:nutzerid', array(':nutzerid'=>$nutzerid))[0]['passwort'])) {
+            if ($neuespasswort == $neuespasswortwiederholen) {
+                if (strlen($neuespasswort) >= 6 && strlen($neuespasswort) <= 60) {
+                    DB::query('UPDATE nutzer SET passwort=:neues_passwort WHERE id=:nutzerid', array(':neuespasswort'=>password_hash($neuespasswort, PASSWORD_BCRYPT), ':nutzerid'=>$nutzerid));
                     echo 'Dein Passwort wurde erfolgreich geändert';
                 }
             } else {

@@ -3,12 +3,12 @@ include('klassen/DB.php');
 
 if (isset($_POST['login'])) {
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $nutzername = $_POST['nutzername'];
+    $passwort = $_POST['passwort'];
 
-    if (DB::query('SELECT username FROM nutzer WHERE username=:username', array(':username'=>$username))) {
+    if (DB::query('SELECT nutzername FROM nutzer WHERE nutzername=:nutzername', array(':nutzername'=>$nutzername))) {
 
-        if (password_verify($password, DB::query('SELECT password FROM nutzer WHERE username=:username', array(':username'=>$username))[0]['password'])) {
+        if (password_verify($passwort, DB::query('SELECT passwort FROM nutzer WHERE nutzername=:nutzername', array(':nutzername'=>$nutzername))[0]['passwort'])) {
             echo 'Willkommen bei Connect!';
             }
         else {
@@ -23,8 +23,8 @@ if (isset($_POST['login'])) {
 ?>
 <h1>Bei Connect anmelden</h1>
 <form action="anmeldung.php" method="post">
-    <input type="text" name="username" value="" placeholder="Benutzername ..."><p />
-    <input type="password" name="password" value="" placeholder="Passwort ..."><p />
+    <input type="text" name="nutzername" value="" placeholder="Benutzername ..."><p />
+    <input type="password" name="passwort" value="" placeholder="Passwort ..."><p />
     <input type="submit" name="login" value="Anmelden">
 </form>
 
