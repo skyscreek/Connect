@@ -36,7 +36,7 @@ if (isset($_POST['nutzer-erstellen'])) {
 
         }
     } else {
-        echo 'Dieser Benutzer existiert bereits!';
+        echo 'Dieser Benutzer existiert schon!';
     }
 }
 ?>
