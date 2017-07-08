@@ -2,7 +2,7 @@
 include('./klassen/DB.php');
 include('./klassen/anmeldung_klasse.php');
 if (!anmeldung_klasse::isLoggedIn()) {
-    die("Nicht angemeldet!");
+    die("Nicht angemeldet.");
 }
 if (isset($_POST['confirm'])) {
     if (isset($_POST['alldevices'])) {
@@ -16,16 +16,9 @@ if (isset($_POST['confirm'])) {
     }
 }
 ?>
-<h1>Bist du sicher, dass du dich abmelden willst?</h1>
+<h1>Bist du dir sicher, dass du dich abmelden willst?</h1>
+
 <form action="abmeldung.php" method="post">
     <input type="checkbox" name="alldevices" value="alldevices"> Auf allen Geräten abmelden?<br />
     <input type="submit" name="confirm" value="Bestätigen">
 </form>
-
-
-/**
- * Created by PhpStorm.
- * User: Noa
- * Date: 08.07.17
- * Time: 13:45
- */
