@@ -9,7 +9,7 @@ if (isset($_POST['login'])) {
     if (DB::query('SELECT username FROM nutzer WHERE username=:username', array(':username'=>$username))) {
 
         if (password_verify($password, DB::query('SELECT password FROM nutzer WHERE username=:username', array(':username'=>$username))[0]['password'])) {
-            echo 'Willkommen bei connect!';
+            echo 'Willkommen bei Connect!';
 
         } else {
 
