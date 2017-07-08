@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="mars" uploadOnCheckin="7ec9b75e-1ced-441f-9df1-e3f2a15e969b">
+    <serverData>
+      <paths name="mars">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="/" web="/~ch126" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="mars" />
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
