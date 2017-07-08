@@ -3,7 +3,7 @@ class DB
 {
     private static function connect()
     {
-        $pdo = new PDO('mysql:host=mars.iuk.hdm-stuttgart.de;dbname=u-ch126;charset=utf8', 'ch126', 'OhK5aepair');
+        $pdo = new PDO('mysql:host=127.0.0.1;dbname=u-ch126;charset=utf8', 'ch126', 'OhK5aepair');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     }
@@ -12,8 +12,11 @@ class DB
     {
         $statement = self::connect()->prepare($query);
         $statement->execute($params);
-        // $data = $statement->fetchAll();
-        // return $data;
+
+        if (explode(' ', $query)[0] == 'SELECT') {
+            $data = $statement->fetchAll();
+            return $data;
+        }
     }
 }
 /**
@@ -22,3 +25,4 @@ class DB
  * Date: 07.07.17
  * Time: 20:27
  */
+
