@@ -30,6 +30,18 @@ if (isset($_GET['nutzername'])) {
             //echo 'Already following!';
             $folgtgerade = True;
         }
+        if (isset($_POST['inhalt'])) {
+            $inhalt = $_POST['inhalt'];
+            $aktivenutzerid = anmeldung_klasse::isLoggedIn();
+            if (strlen($inhalt) > 160 || strlen($inhalt) < 1) {
+                die('Der Beitrag hat nicht die passende Länge!');
+            }
+            if ($aktivenutzerid == $nutzerid) {
+                DB::query('INSERT INTO posts VALUES (\'\', :inhalt, NOW(), :nutzerid)', array(':inhalt'=>$inhalt, ':nutzerid'=>$nutzerid));
+            } else {
+                die('Falscher user!');
+            }
+        }
     } else {
         die('Nutzer wurde nicht gefunden!');
     }
@@ -46,4 +58,9 @@ if (isset($_GET['nutzername'])) {
         }
     }
     ?>
+</form>
+
+<form action="profil.php?nutzername=<?php echo $nutzername; ?>" method="post">
+    <textarea name="inhalt" rows="8" cols="80"></textarea>
+    <input type="submit" name="inhalt" value="Post">
 </form>
