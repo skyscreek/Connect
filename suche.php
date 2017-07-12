@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Connect</title>
 
@@ -22,7 +22,6 @@
 </head>
 
 <body>
-
 <?php
 include('./klassen/DB.php');
 include('./klassen/anmeldung_klasse.php');
@@ -32,30 +31,6 @@ $nutzername1 = DB::query('SELECT nutzername FROM nutzer WHERE id=:nutzername', a
 foreach ($nutzername1 as $nutzername2) {
     $nutzername=$nutzername2['nutzername'];
 }
-$zeigeZeitleiste = False;
-if (anmeldung_klasse::isLoggedIn()) {
-    $nutzerid = anmeldung_klasse::isLoggedIn();
-    $zeigeZeitleiste = True;
-} else {
-    die ('<h1>Du bist gerade nicht eingeloggt!</h1></br><h4><a href="anmeldung.php">Hier einloggen</a></h4>');
-
-}
-
-
-$folgen=DB::query('SELECT * FROM folger WHERE nutzer_id = :folger', array(':folger'=>$nutzerid));
-$folgt= [];
-foreach ($folgen as $item) {
-    $folgt[]=$item['folger_id'];
-
-}
-$folgt=implode(',',$folgt);
-
-$folgerposts = DB::query("SELECT * FROM posts WHERE nutzer_id IN (:folgt) ORDER BY nutzer_id DESC", array(':folgt'=>$folgt));
-
-
-
-
-
 ?>
 <div class="container">
 
@@ -77,33 +52,43 @@ $folgerposts = DB::query("SELECT * FROM posts WHERE nutzer_id IN (:folgt) ORDER 
                     <li class="active"><a href="profil.php?nutzername=<?php echo $nutzername; ?>">Mein Profil</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    &nbsp;&nbsp;<li class="active"><a href="suche.php">Suchen</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="abmeldung.php">Abmelden</a></li>
                 </ul>
 
-
+                <ul class="nav navbar-nav navbar-right">
+                    &nbsp;&nbsp;<li class="active"><a href="#">Suchen</a></li>
+                </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <h2>Alle Posts</h2>
-        </br>
-        <div class="inhalte">
 
-            <?php foreach($folgerposts as $post) {
-                $nutzername = DB::query('SELECT * FROM  nutzer WHERE id = :nutzername', array(':nutzername' => $post['nutzer_id']));
-                foreach ($nutzername as $nutzerbezeichnung) {
-                    echo $nutzerbezeichnung['nutzername'] . "</br>" .
-                        "<img src='".$post['bilder']."' class='img-responsive'><br>".
-                        $post['inhalt'] . "</br>" . $post['gepostet_um'] . "<hr /></br />";
-                }
+
+
+        <form action="suche.php" method="post">
+
+
+            <input type="text" name="suchfeld" value="">&nbsp;&nbsp;
+
+
+            <input type="submit" name="suche" value="Nutzer suchen">
+
+
+        </form>
+        <?php
+
+
+
+
+        if (isset($_POST['suche'])) {
+            $nutzer = DB::query('SELECT nutzer.nutzername FROM nutzer WHERE nutzer.nutzername LIKE :nutzername', array(':nutzername'=>'%'.$_POST['suchfeld'].'%'));
+            foreach ($nutzer as $f){
+                echo "<ul><h4><a href='profil.php?nutzername=".$f['nutzername']."'>".$f["nutzername"]."</a><br></h4></ul>";
             }
-            ?>
+        }
 
-        </div>
+        ?>
 
     </div> <!-- /container -->

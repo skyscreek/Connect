@@ -1,0 +1,97 @@
+body {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/2/29/Crescent_City_Connection_bridges_over_the_Mississippi_River.jpg) no-repeat center center fixed;
+    /* Copyright (c) 2010. Eric Pancer. Creative Commons 3.0 (Attribution)*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: whitesmoke;
+}
+
+
+h1 {
+    text-align: center;
+
+}
+
+h4 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+h5 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+h2 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+h2.margin-base-vertical {
+    text-align: center;
+    color: whitesmoke;
+
+}
+
+div.h4 {
+    text-align: center;
+    color: whitesmoke;
+
+}
+
+a p {
+    color: whitesmoke;
+}
+
+.navbar-default .navbar-brand {
+    color: whitesmoke;
+}
+
+textarea {
+    background-color: grey;
+
+}
+
+input {
+    background-color: grey;
+}
+
+div.jumbotron {
+    background-color: #484848;
+    border-color: #414141;
+}
+
+div.inhalte {
+    color: whitesmoke;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    color: whitesmoke;
+    background-color: #555555;
+}
+
+div.panel {
+    background-color: rgba(21, 21, 21, 0.7);
+
+}
+
+.test {
+
+    text-decoration: red;
+}
+
+.navbar-default {
+    background-color: #484848;
+    border-color: #484848;
+}
+
+.connect {
+
+    padding-top: 80px;
+}
+
+.margin-base-vertical {
+    margin: 45px 0;
+}
